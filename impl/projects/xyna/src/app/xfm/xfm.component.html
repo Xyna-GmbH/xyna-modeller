@@ -1,0 +1,26 @@
+<xc-title-bar
+    xc-i18n-context="xfm"
+    [xc-title-bar-application-versions]="applicationVersions"
+    xc-title-bar-company="GIP"
+    xc-title-bar-year="2022"
+>
+    <xc-nav-list content
+        [xc-nav-list-items]="navListItems"
+        [xc-nav-list-orientation]="navListOrientation"
+        xc-nav-list-size="large"
+    ></xc-nav-list>
+    <div aside>
+        <xc-status-bar></xc-status-bar>
+        <xc-button
+            (click)="changeRuntimeContext()"
+        >{{currentRuntimeContext?.uniqueKey || ('button-choose-runtime-context' | xcI18n)}}</xc-button>
+        <xc-icon-button
+            *xc-menu-service="true; let menuService"
+            [xc-menu-trigger]="menuService.component"
+            (xc-menu-trigger)="menuService.set(usermenuItems, {withArrow: true, xPosition: 'before', yNexttoTrigger: true, yOffset: 6})"
+            xc-icon-name="user"
+            color="normal"
+        ></xc-icon-button>
+    </div>
+</xc-title-bar>
+<router-outlet></router-outlet>

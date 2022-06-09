@@ -1,0 +1,58 @@
+/*
+ * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ * Copyright 2022 GIP SmartMercial GmbH, Germany
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ */
+// $theme: customtheme;
+
+@import 'zeta/const';
+// @import 'customtheme';
+
+
+@import 'xfm/processmodeller/const';
+@import 'xfm/processmonitor/const';
+@import 'xfm/factorymanager/const';
+
+
+/****************************************************
+ * Overridden Zeta Styles
+ ****************************************************/
+
+$xc-title-bar-box-shadow-visible: true;
+
+// Button
+$xc-button-background-color: #454548;
+$xc-button-border-color: $color-gray-1;
+$xc-button-border-radius: 4px;
+
+
+
+/****************************************************
+ * XFM Variables
+ ****************************************************/
+
+@if $theme == xyna {
+    $navigation-highlight-color-processmodeller: #f10870;
+    $navigation-highlight-color-factorymanager: #00a0ff;
+    $navigation-highlight-color-processmonitor: #5de700;
+    $navigation-highlight-color-testfactory: #e5fcff;
+    $navigation-highlight-color-acm: #8f0088;
+} @else {
+    $navigation-highlight-color-processmodeller: $color-black;
+    $navigation-highlight-color-factorymanager: $color-black;
+    $navigation-highlight-color-processmonitor: $color-black;
+    $navigation-highlight-color-testfactory: $color-black;
+    $navigation-highlight-color-acm: $color-black;
+}

@@ -1,0 +1,31 @@
+{
+    "compileOnSave": false,
+    "compilerOptions": {
+        "baseUrl": "./",
+        "outDir": "./dist/out-tsc",
+        "sourceMap": true,
+        "declaration": false,
+        "moduleResolution": "node",
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "downlevelIteration": true,
+        "target": "es5",
+        "typeRoots": [
+            "node_modules/@types"
+        ],
+		"lib": [
+            "es2018",
+            "dom"
+        ],
+        "paths": {
+            "@zeta/*": ["projects/xyna/src/app/zeta/*"],
+            "@pmod/*": ["projects/xyna/src/app/xfm/processmodeller/*"],
+            "@fman/*": ["projects/xyna/src/app/xfm/factorymanager/*"],
+            "@yggdrasil/*": ["projects/xyna/src/app/xfm/yggdrasil/*"],
+            "@environments/*": ["projects/xyna/src/environments/*"]
+        }
+    },
+    "angularCompilerOptions": {
+        "preserveWhitespaces": false
+    }
+}

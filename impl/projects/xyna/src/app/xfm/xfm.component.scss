@@ -1,0 +1,136 @@
+/*
+ * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ * Copyright 2022 GIP SmartMercial GmbH, Germany
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ */
+$navigation-highlight-color-processmodeller: unset !default;
+$navigation-highlight-color-factorymanager: unset !default;
+$navigation-highlight-color-processmonitor: unset !default;
+$navigation-highlight-color-testfactory: unset !default;
+$navigation-highlight-color-acm: unset !default;
+
+@import 'const';
+
+
+:host {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    xc-nav-list::ng-deep {
+        display: flex;
+
+        xc-nav-list-item xc-icon[size="large"] {
+            & > span {
+                font-weight: bold;
+                letter-spacing: 1px;
+                font-size: 14px;
+                font-family: "Open Sans Regular", sans-serif;
+                text-transform: uppercase;
+            }
+        }
+
+        a.processmodeller:not(.disabled) {
+            xc-icon {
+                i {
+                    fill: $navigation-highlight-color-processmodeller !important;
+                    color: $navigation-highlight-color-processmodeller !important;
+                }
+            }
+            &.active, &:hover {
+                border-color: $navigation-highlight-color-processmodeller;
+            }
+            &.active {
+                xc-icon > span {
+                    color: $color-normal;
+                }
+            }
+        }
+        a.factorymanager:not(.disabled) {
+            xc-icon {
+                i {
+                    fill: $navigation-highlight-color-factorymanager !important;
+                    color: $navigation-highlight-color-factorymanager !important;
+                }
+            }
+            &.active, &:hover {
+                border-color: $navigation-highlight-color-factorymanager;
+            }
+            &.active {
+                xc-icon > span {
+                    color: $color-normal;
+                }
+            }
+        }
+        a.processmonitor:not(.disabled) {
+            xc-icon {
+                i {
+                    fill: $navigation-highlight-color-processmonitor !important;
+                    color: $navigation-highlight-color-processmonitor !important;
+                }
+            }
+            &.active, &:hover {
+                border-color: $navigation-highlight-color-processmonitor;
+            }
+            &.active {
+                xc-icon > span {
+                    color: $color-normal;
+                }
+            }
+        }
+        a.testfactory:not(.disabled) {
+            xc-icon {
+                i {
+                    fill: $navigation-highlight-color-testfactory !important;
+                    color: $navigation-highlight-color-testfactory !important;
+                }
+            }
+            &.active, &:hover {
+                border-color: $navigation-highlight-color-testfactory;
+            }
+            &.active {
+                xc-icon > span {
+                    color: $color-normal;
+                }
+            }
+        }
+        a.acm:not(.disabled) {
+            xc-icon {
+                i {
+                    fill: $navigation-highlight-color-acm !important;
+                    color: $navigation-highlight-color-acm !important;
+                }
+            }
+            &.active, &:hover {
+                border-color: $navigation-highlight-color-acm;
+            }
+            &.active {
+                xc-icon > span {
+                    color: $color-normal;
+                }
+            }
+        }
+    }
+
+    xc-button {
+        margin-left: 8px;
+    }
+
+    [aside] {
+        *:not(:last-child) {
+            margin-right: 4px;
+        }
+    }
+}
