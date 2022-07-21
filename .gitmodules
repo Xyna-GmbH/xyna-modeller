@@ -1,3 +1,6 @@
 [submodule "impl/projects/xyna/src/app/zeta"]
 	path = impl/projects/xyna/src/app/zeta
 	url = https://github.com/GIP-SmartMercial/xyna-zeta.git
+[submodule "impl/projects/xyna/src/app/xfm/process-modeller"]
+	path = impl/projects/xyna/src/app/xfm/process-modeller
+	url = https://github.com/GIP-SmartMercial/xyna-process-modeller.git
