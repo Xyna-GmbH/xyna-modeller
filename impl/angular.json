@@ -5,10 +5,10 @@
     "projects": {
         "xyna": {
             "root": "projects/xyna",
+            "sourceRoot": "src",
             "projectType": "application",
             "architect": {
                 "build": {
-                    "aot": true,
                     "builder": "@angular-devkit/build-angular:browser",
                     "options": {
                         "outputPath": "dist/xyna",
@@ -56,27 +56,26 @@
                             ],
                             "optimization": true,
                             "outputHashing": "all",
-                            "sourceMap": false,
                             "namedChunks": false,
+                            "sourceMap": false,
                             "aot": true,
                             "extractLicenses": true,
                             "vendorChunk": false,
                             "buildOptimizer": true
                         },
+                        "development": {
+                            "optimization": false,
+                            "sourceMap": true
+                        },
                         "de-DE": {
                             "aot": true,
                             "outputPath": "dist/xyna-de-DE/",
-                            "i18nFile": "projects/xyna/locale/messages.de-DE.xlf",
-                            "i18nFormat": "xlf",
-                            "i18nLocale": "de-DE",
+                            "localize": true,
                             "i18nMissingTranslation": "error"
                         },
                         "en-US": {
                             "aot": true,
                             "outputPath": "dist/xyna-en-US/",
-                            "i18nFile": "projects/xyna/locale/messages.en-US.xlf",
-                            "i18nFormat": "xlf",
-                            "i18nLocale": "en-US",
                             "i18nMissingTranslation": "error"
                         }
                     }
@@ -89,6 +88,9 @@
                     "configurations": {
                         "production": {
                             "browserTarget": "xyna:build:production"
+                        },
+                        "development": {
+                            "browserTarget": "xyna:build:development"
                         },
                         "de-DE": {
                             "browserTarget": "xyna:build:de-DE"

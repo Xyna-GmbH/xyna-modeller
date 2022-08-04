@@ -20,7 +20,7 @@ import { ActivatedRouteSnapshot, CanActivate, RouterModule, RouterStateSnapshot,
 
 import { environment } from '@environments/environment';
 
-import { Observable, of } from 'rxjs/';
+import { Observable, of } from 'rxjs';
 
 import { PlaygroundComponent } from './playground.component';
 import { PlaygroundModule } from './playground.module';
