@@ -22,7 +22,7 @@ import { RuntimeContext } from '@zeta/api/xo/xo-describer';
 export const environment: ZetaEnvironment = {
     production: true,
     zeta: {
-        url: location.origin + '/',
+        url: location.origin + '/XynaBlackEditionWebServices/io/',
         xo: {
             runtimeContext: RuntimeContext.fromWorkspace('Process Modeller REST'),
             consistencyCheck: false

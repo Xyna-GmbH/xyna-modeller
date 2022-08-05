@@ -5,11 +5,9 @@
     "private": true,
     "scripts": {
         "ng": "ng",
-        "start": "ng serve --configuration=development --ssl=true --ssl-key=./ssl/server-public.pem",
+        "start": "ng serve --configuration=en --ssl=true --ssl-key=./ssl/server-public.pem",
         "build": "ng build xyna",
-        "release": "ng build xyna --configuration=production --extract-licenses",
-        "release:de-DE": "ng build xyna --configuration=production --extract-licenses --i18n-file ./projects/xyna/locale/messages.de-DE.xlf --i18n-format xlf --i18n-locale de-DE",
-        "release:en-US": "ng build xyna --prod --extract-licenses --i18n-file ./projects/xyna/locale/messages.en-US.xlf --i18n-format xlf --i18n-locale en-US",
+        "release": "ng build xyna --configuration=production --localize --extract-licenses",
         "lint": "eslint --color -c .eslintrc.json --ext .ts ./projects/xyna/src/app",
         "lint:fix": "npm run lint -- --fix",
         "tsc": "tsc",

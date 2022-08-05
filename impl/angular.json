@@ -7,6 +7,18 @@
             "root": "projects/xyna",
             "sourceRoot": "src",
             "projectType": "application",
+            "i18n": {
+                "sourceLocale": {
+                    "baseHref": "/modeller_en-US/",
+                    "code": "en-US"
+                },
+                "locales": {
+                    "de-DE": {
+                        "translation": "projects/xyna/locale/messages.de-DE.xlf",
+                        "baseHref": "/modeller_de-DE/"
+                    }
+                }
+            },
             "architect": {
                 "build": {
                     "builder": "@angular-devkit/build-angular:browser",
@@ -16,6 +28,7 @@
                         "main": "projects/xyna/src/main.ts",
                         "polyfills": "projects/xyna/src/polyfills.ts",
                         "tsConfig": "projects/xyna/tsconfig.app.json",
+                        "localize": true,
                         "assets": [
                             {
                                 "glob": "favicon.ico",
@@ -67,16 +80,8 @@
                             "optimization": false,
                             "sourceMap": true
                         },
-                        "de-DE": {
-                            "aot": true,
-                            "outputPath": "dist/xyna-de-DE/",
-                            "localize": true,
-                            "i18nMissingTranslation": "error"
-                        },
                         "en-US": {
-                            "aot": true,
-                            "outputPath": "dist/xyna-en-US/",
-                            "i18nMissingTranslation": "error"
+                            "localize": ["en-US"]
                         }
                     }
                 },
@@ -93,10 +98,10 @@
                             "browserTarget": "xyna:build:development"
                         },
                         "de-DE": {
-                            "browserTarget": "xyna:build:de-DE"
+                            "browserTarget": "xyna:build:development,de-DE"
                         },
-                        "en-US": {
-                            "browserTarget": "xyna:build:en-US"
+                        "en": {
+                            "browserTarget": "xyna:build:development,en-US"
                         }
                     }
                 },
