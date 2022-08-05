@@ -4,7 +4,8 @@
         "outDir": "../../out-tsc/app",
         "module": "es2015",
         "types": [
-            "resize-observer-browser"
+            "resize-observer-browser",
+            "offscreencanvas"
         ]
     },
     "files": [

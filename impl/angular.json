@@ -5,10 +5,22 @@
     "projects": {
         "xyna": {
             "root": "projects/xyna",
+            "sourceRoot": "src",
             "projectType": "application",
+            "i18n": {
+                "sourceLocale": {
+                    "baseHref": "/modeller_en-US/",
+                    "code": "en-US"
+                },
+                "locales": {
+                    "de-DE": {
+                        "translation": "projects/xyna/locale/messages.de-DE.xlf",
+                        "baseHref": "/modeller_de-DE/"
+                    }
+                }
+            },
             "architect": {
                 "build": {
-                    "aot": true,
                     "builder": "@angular-devkit/build-angular:browser",
                     "options": {
                         "outputPath": "dist/xyna",
@@ -16,6 +28,7 @@
                         "main": "projects/xyna/src/main.ts",
                         "polyfills": "projects/xyna/src/polyfills.ts",
                         "tsConfig": "projects/xyna/tsconfig.app.json",
+                        "localize": true,
                         "assets": [
                             {
                                 "glob": "favicon.ico",
@@ -56,28 +69,19 @@
                             ],
                             "optimization": true,
                             "outputHashing": "all",
-                            "sourceMap": false,
                             "namedChunks": false,
+                            "sourceMap": false,
                             "aot": true,
                             "extractLicenses": true,
                             "vendorChunk": false,
                             "buildOptimizer": true
                         },
-                        "de-DE": {
-                            "aot": true,
-                            "outputPath": "dist/xyna-de-DE/",
-                            "i18nFile": "projects/xyna/locale/messages.de-DE.xlf",
-                            "i18nFormat": "xlf",
-                            "i18nLocale": "de-DE",
-                            "i18nMissingTranslation": "error"
+                        "development": {
+                            "optimization": false,
+                            "sourceMap": true
                         },
                         "en-US": {
-                            "aot": true,
-                            "outputPath": "dist/xyna-en-US/",
-                            "i18nFile": "projects/xyna/locale/messages.en-US.xlf",
-                            "i18nFormat": "xlf",
-                            "i18nLocale": "en-US",
-                            "i18nMissingTranslation": "error"
+                            "localize": ["en-US"]
                         }
                     }
                 },
@@ -90,11 +94,14 @@
                         "production": {
                             "browserTarget": "xyna:build:production"
                         },
-                        "de-DE": {
-                            "browserTarget": "xyna:build:de-DE"
+                        "development": {
+                            "browserTarget": "xyna:build:development"
                         },
-                        "en-US": {
-                            "browserTarget": "xyna:build:en-US"
+                        "de-DE": {
+                            "browserTarget": "xyna:build:development,de-DE"
+                        },
+                        "en": {
+                            "browserTarget": "xyna:build:development,en-US"
                         }
                     }
                 },
