@@ -1,0 +1,82 @@
+name: Build Xyna Modeller
+
+on:
+  #push:
+  #  branches: [ "main" ]
+    
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Check out zeta
+      uses: actions/checkout@v3
+      with:
+            repository: GIP-SmartMercial/xyna-zeta
+            path: impl/projects/xyna/src/app/zeta
+            
+    - name: Check out processmodeller
+      uses: actions/checkout@v3
+      with:
+            repository: GIP-SmartMercial/xyna-process-modeller
+            path: impl/projects/xyna/src/app/xfm/processmodeller
+
+    - name: Check out processmonitor
+      uses: actions/checkout@v3
+      with:
+            repository: GIP-SmartMercial/xyna-process-monitor
+            path: impl/projects/xyna/src/app/xfm/processmonitor
+
+    - name: Check out factorymanager
+      uses: actions/checkout@v3
+      with:
+            repository: GIP-SmartMercial/xyna-factory-manager
+            path: impl/projects/xyna/src/app/xfm/factorymanager
+
+    - name: Check out testfactory
+      uses: actions/checkout@v3
+      with:
+            repository: GIP-SmartMercial/xyna-test-factory
+            path: impl/projects/xyna/src/app/xfm/testfactory
+
+    - name: Check out acm
+      uses: actions/checkout@v3
+      with:
+            repository: GIP-SmartMercial/xyna-xacm
+            path: impl/projects/xyna/src/app/xfm/acm
+
+    - name: Check out yggdrasil
+      uses: actions/checkout@v3
+      with:
+            repository: GIP-SmartMercial/xyna-yggdrasil
+            path: impl/projects/xyna/src/app/xfm/yggdrasil
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Build
+      run: |
+        cd impl
+        npm install
+        cd ../script
+        npm install
+        npm run release:en
+
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v3.1.1
+      with:
+        # Artifact name
+        name: xyna-modeller
+        # A file, directory or wildcard pattern that describes what to upload
+        path: dist
+        retention-days: 1
