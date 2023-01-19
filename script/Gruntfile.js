@@ -94,6 +94,10 @@ function Gruntfile(grunt) {
 	if (grunt.option('lang') === 'de-DE') {
 		htmlLang = 'de';
 	}
+    fullLangSuffix = 'en-US';
+	if (grunt.option('lang')) {
+	    fullLangSuffix = grunt.option('lang');
+	}
 
     config["clean"] = {
         options: {
@@ -223,7 +227,7 @@ function Gruntfile(grunt) {
     //-----------
 
     grunt.registerTask("rename-for-concat-copyright", () => {
-      var origfileList = grunt.file.expand("../impl/dist/xyna/main.*.js");
+      var origfileList = grunt.file.expand("../impl/dist/xyna/" + fullLangSuffix + "/main.*.js");
       var origfile = origfileList[0];
       config["main.js.origfile"] = origfile;
       grunt.file.copy(origfile, "./_main.js");
@@ -246,7 +250,7 @@ function Gruntfile(grunt) {
     grunt.registerTask("release", [
         "clean:build", "clean:release",
         "test-modeler", "release-modeler" + (grunt.option("lang") ? "::" + grunt.option('lang') : ""),
-        "replace:baseurl", "replace:title", "add-copyright-header", "clean:mocks", "replace:lang",
+        /*"replace:baseurl", "replace:title",*/ "add-copyright-header", "clean:mocks", "replace:lang",
         "compress:build-war"
     ]);
 
