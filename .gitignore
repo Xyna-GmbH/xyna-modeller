@@ -3,3 +3,4 @@
 impl/.vscode/settings.json
 impl/.angular/**
 impl/dist/**
+dist/
