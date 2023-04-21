@@ -36,8 +36,8 @@ export const environment: ZetaEnvironment = {
             smartCardLogin: false,
             credentialsLogin: true,
             languages: [
-                { label: 'English', baseUrl: '/' },
-                { label: 'Deutsch', baseUrl: '/' }
+                { label: 'English', languageKey: 'en-US' },
+                { label: 'Deutsch', languageKey: 'de-DE' }
             ]
         }
     }

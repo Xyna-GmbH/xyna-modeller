@@ -1,6 +1,6 @@
 /*
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
- * Copyright 2022 GIP SmartMercial GmbH, Germany
+ * Copyright 2023 GIP SmartMercial GmbH, Germany
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -43,7 +43,7 @@ function Gruntfile(grunt) {
         pkg: grunt.file.readJSON("package.json"),
 
         //Titel der Anwendung
-        appTitle: "Fractal Modeller",
+        appTitle: "Modeller",
 
         //Name der WAR-Datei und des Pfades, in den später ein Release deployt wird
         appName: "modeller",
@@ -128,9 +128,9 @@ function Gruntfile(grunt) {
 		},
         "baseurl": {
             options: {
-                patterns: [{match: /<base href=\"\/\">/g, replacement: "<base href=\"<%= baseUrl %>\">"}]
+                patterns: [{match: /<base href=\".*\">/g, replacement: "<base href=\"<%= baseUrl %>\">"}]
             },
-            files: [{expand: true, flatten: true, src: ["<%= buildDir %>/../impl/dist/xyna/index.html"], dest: "<%= buildDir %>/../impl/dist/xyna"}]
+            files: [{expand: true, flatten: true, src: ["<%= buildDir %>/../impl/dist/xyna/en-US/index.html"], dest: "<%= buildDir %>/../impl/dist/xyna/en-US"}]
         },
         "baseurl-dev": {
             options: {
@@ -146,7 +146,7 @@ function Gruntfile(grunt) {
                 mode: "zip",
                 archive: "<%= releaseDir %>/<%= appName %><%= langSuffix %>.war",
             },
-            files: [{expand: true, cwd: "<%= buildDir %>/../impl/dist/xyna/", src: ["**"]}]
+            files: [{expand: true, cwd: "<%= buildDir %>/../impl/dist/xyna/en-US/", src: ["**"]}]
         }
     };
 
@@ -250,7 +250,7 @@ function Gruntfile(grunt) {
     grunt.registerTask("release", [
         "clean:build", "clean:release",
         "test-modeler", "release-modeler" + (grunt.option("lang") ? "::" + grunt.option('lang') : ""),
-        /*"replace:baseurl", "replace:title",*/ "add-copyright-header", "clean:mocks", "replace:lang",
+        "replace:baseurl", /*"replace:title",*/ "add-copyright-header", "clean:mocks", /*"replace:lang",*/
         "compress:build-war"
     ]);
 
