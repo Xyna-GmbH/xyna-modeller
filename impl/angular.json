@@ -7,18 +7,6 @@
             "root": "projects/xyna",
             "sourceRoot": "src",
             "projectType": "application",
-            "i18n": {
-                "sourceLocale": {
-                    "baseHref": "/modeller_en-US/",
-                    "code": "en-US"
-                },
-                "locales": {
-                    "de-DE": {
-                        "translation": "projects/xyna/locale/messages.de-DE.xlf",
-                        "baseHref": "/modeller_de-DE/"
-                    }
-                }
-            },
             "architect": {
                 "build": {
                     "builder": "@angular-devkit/build-angular:browser",
@@ -79,9 +67,6 @@
                         "development": {
                             "optimization": false,
                             "sourceMap": true
-                        },
-                        "en-US": {
-                            "localize": ["en-US"]
                         }
                     }
                 },
@@ -96,33 +81,6 @@
                         },
                         "development": {
                             "browserTarget": "xyna:build:development"
-                        },
-                        "de-DE": {
-                            "browserTarget": "xyna:build:development,de-DE"
-                        },
-                        "en": {
-                            "browserTarget": "xyna:build:development,en-US"
-                        }
-                    }
-                },
-                "extract-i18n": {
-                    "builder": "@angular-devkit/build-angular:extract-i18n",
-                    "options": {
-                        "browserTarget": "xyna:build"
-                    }
-                },
-                "xliffmerge": {
-                    "builder": "@ngx-i18nsupport/tooling:xliffmerge",
-                    "options": {
-                        "xliffmergeOptions": {
-                            "i18nFormat": "xlf",
-                            "srcDir": "./projects/xyna/locale",
-                            "genDir": "./projects/xyna/locale",
-                            "defaultLanguage": "en-US",
-                            "languages": [
-                                "en-US",
-                                "de-DE"
-                            ]
                         }
                     }
                 }

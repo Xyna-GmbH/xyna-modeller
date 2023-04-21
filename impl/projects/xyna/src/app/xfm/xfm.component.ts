@@ -28,7 +28,7 @@ import { RightsInterceptor } from '@zeta/api/rights.interceptor';
 import { AuthService } from '@zeta/auth';
 import { AuthEventService } from '@zeta/auth/auth-event.service';
 import { KeyboardEventType, KeyDistributionService } from '@zeta/base';
-import { I18nService } from '@zeta/i18n';
+import { I18nService, LocaleService } from '@zeta/i18n';
 import { RuntimeContextSelectionComponent } from '@zeta/nav';
 import { XcDialogService, XcMenuItem, XcNavListItem, XcNavListOrientation, XcStatusBarComponent } from '@zeta/xc';
 
@@ -72,8 +72,8 @@ export class XfmComponent implements OnInit {
         private readonly router: Router,
         readonly messageBus: MessageBusService
     ) {
-        this.i18n.setTranslations(I18nService.DE_DE, xfm_translations_de_DE);
-        this.i18n.setTranslations(I18nService.EN_US, xfm_translations_en_US);
+        this.i18n.setTranslations(LocaleService.DE_DE, xfm_translations_de_DE);
+        this.i18n.setTranslations(LocaleService.EN_US, xfm_translations_en_US);
 
         const navListItems = [
             { link: 'Process-Modeller', icon: 'processmodeller', iconStyle: 'modeller', name: ProcessModellerName, class: 'processmodeller', tooltip: this.i18n.translate('xfm.processmodeller-tooltip') },
