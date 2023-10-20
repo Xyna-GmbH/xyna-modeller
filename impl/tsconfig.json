@@ -10,21 +10,32 @@
         "experimentalDecorators": true,
         "downlevelIteration": true,
         "allowSyntheticDefaultImports": true,
-        "target": "es2015",
+        "target": "ES2022",
         "typeRoots": [
             "node_modules/@types"
         ],
-		"lib": [
+        "lib": [
             "es2018",
             "dom"
         ],
         "paths": {
-            "@zeta/*": ["projects/xyna/src/app/zeta/*"],
-            "@pmod/*": ["projects/xyna/src/app/xfm/processmodeller/*"],
-            "@fman/*": ["projects/xyna/src/app/xfm/factorymanager/*"],
-            "@yggdrasil/*": ["projects/xyna/src/app/xfm/yggdrasil/*"],
-            "@environments/*": ["projects/xyna/src/environments/*"]
-        }
+            "@zeta/*": [
+                "projects/xyna/src/app/zeta/*"
+            ],
+            "@pmod/*": [
+                "projects/xyna/src/app/xfm/processmodeller/*"
+            ],
+            "@fman/*": [
+                "projects/xyna/src/app/xfm/factorymanager/*"
+            ],
+            "@yggdrasil/*": [
+                "projects/xyna/src/app/xfm/yggdrasil/*"
+            ],
+            "@environments/*": [
+                "projects/xyna/src/environments/*"
+            ]
+        },
+        "useDefineForClassFields": false
     },
     "angularCompilerOptions": {
         "preserveWhitespaces": false
