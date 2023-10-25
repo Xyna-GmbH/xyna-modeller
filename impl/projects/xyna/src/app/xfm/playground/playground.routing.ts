@@ -16,7 +16,7 @@
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, RouterModule, RouterStateSnapshot, Routes } from '@angular/router';
+import { ActivatedRouteSnapshot, RouterModule, RouterStateSnapshot, Routes } from '@angular/router';
 
 import { environment } from '@environments/environment';
 
@@ -29,7 +29,7 @@ import { PlaygroundModule } from './playground.module';
 const root = 'Playground';
 
 @Injectable()
-export class PlaygroundGuard implements CanActivate {
+export class PlaygroundGuard  {
     canActivate(activatedRoute: ActivatedRouteSnapshot, routerState: RouterStateSnapshot): Observable<boolean> {
         return of(!environment.production);
     }
