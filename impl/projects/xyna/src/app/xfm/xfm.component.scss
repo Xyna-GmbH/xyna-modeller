@@ -34,11 +34,9 @@ $navigation-highlight-color-acm: unset !default;
 
         xc-nav-list-item xc-icon[size="large"] {
             & > span {
-                font-weight: bold;
                 letter-spacing: 1px;
-                font-size: 14px;
-                font-family: "Open Sans Regular", sans-serif;
-                text-transform: uppercase;
+                font-size: $font-size-medium;
+                font-family: $font-family-bolder;
             }
         }
 
