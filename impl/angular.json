@@ -76,14 +76,14 @@
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
                     "options": {
-                        "browserTarget": "xyna:build"
+                      "buildTarget": "xyna:build"
                     },
                     "configurations": {
                         "production": {
-                            "browserTarget": "xyna:build:production"
+                          "buildTarget": "xyna:build:production"
                         },
                         "development": {
-                            "browserTarget": "xyna:build:development"
+                          "buildTarget": "xyna:build:development"
                         }
                     }
                 }
