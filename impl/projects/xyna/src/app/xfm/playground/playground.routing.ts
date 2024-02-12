@@ -35,7 +35,7 @@ export class PlaygroundGuardService  {
     }
 }
 
-export const PlaygroundGuardCanActivate: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> => inject(PlaygroundGuardService).canActivate(route, state);
+export const playgroundGuardCanActivate: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> => inject(PlaygroundGuardService).canActivate(route, state);
 
 
 export const PlaygroundRoutes: Routes = [
@@ -51,7 +51,7 @@ export const PlaygroundRoutes: Routes = [
             reuse: root,
             title: root
         },
-        canActivate: [PlaygroundGuardCanActivate]
+        canActivate: [playgroundGuardCanActivate]
     }
 ];
 

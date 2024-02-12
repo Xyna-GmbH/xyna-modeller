@@ -17,14 +17,14 @@
  */
 import { RouterModule, Routes } from '@angular/router';
 
-import { AuthGuardCanActivate } from '@zeta/auth';
+import { authGuardCanActivate } from '@zeta/auth';
 import { ZetaRoutes, ZetaRoutingModules, ZetaRoutingProviders } from '@zeta/zeta.routing';
 
 import { XfmRoutes, XfmRoutingModules, XfmRoutingProviders } from './xfm/xfm.routing';
 
 
 export const AppRoutes: Routes = [
-    { path: '', children: XfmRoutes, canActivate: [AuthGuardCanActivate] },
+    { path: '', children: XfmRoutes, canActivate: [authGuardCanActivate] },
     ...ZetaRoutes
 ];
 
