@@ -15,8 +15,8 @@
  * limitations under the License.
  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  */
-import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, RouterModule, RouterStateSnapshot, Routes } from '@angular/router';
+import { inject, Injectable } from '@angular/core';
+import { ActivatedRouteSnapshot, CanActivateFn, RouterModule, RouterStateSnapshot, Routes } from '@angular/router';
 
 import { environment } from '@environments/environment';
 
@@ -29,11 +29,14 @@ import { PlaygroundModule } from './playground.module';
 const root = 'Playground';
 
 @Injectable()
-export class PlaygroundGuard  {
+export class PlaygroundGuardService  {
     canActivate(activatedRoute: ActivatedRouteSnapshot, routerState: RouterStateSnapshot): Observable<boolean> {
         return of(!environment.production);
     }
 }
+
+export const PlaygroundGuardCanActivate: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> => inject(PlaygroundGuardService).canActivate(route, state);
+
 
 export const PlaygroundRoutes: Routes = [
     {
@@ -48,7 +51,7 @@ export const PlaygroundRoutes: Routes = [
             reuse: root,
             title: root
         },
-        canActivate: [PlaygroundGuard]
+        canActivate: [PlaygroundGuardCanActivate]
     }
 ];
 
@@ -58,5 +61,5 @@ export const PlaygroundRoutingModules = [
 ];
 
 export const PlaygroundRoutingProviders = [
-    PlaygroundGuard
+    PlaygroundGuardService
 ];
