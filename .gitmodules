@@ -1,9 +1,3 @@
-[submodule "impl/projects/xyna/src/app/zeta"]
-	path = impl/projects/xyna/src/app/zeta
-	url = https://github.com/Xyna-Factory/xyna-zeta.git
-[submodule "impl/projects/xyna/src/app/xfm/process-modeller"]
-	path = impl/projects/xyna/src/app/xfm/processmodeller
-	url = https://github.com/Xyna-Factory/xyna-process-modeller.git
 [submodule "impl/projects/xyna/src/app/xfm/process-monitor"]
 	path = impl/projects/xyna/src/app/xfm/processmonitor
 	url = https://github.com/Xyna-Factory/xyna-process-monitor.git
