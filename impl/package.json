@@ -1,7 +1,7 @@
 {
   "name": "xyna",
   "title": "Xyna Modeller",
-  "version": "10.0.0.0",
+  "version": "10.0.0.3",
   "private": true,
   "scripts": {
     "ng": "ng",
