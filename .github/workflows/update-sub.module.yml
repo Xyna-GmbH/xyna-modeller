@@ -55,4 +55,4 @@ jobs:
      - name: Create Pull Request
        env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-       run: gh pr create --title "Update Submodule Dependencies" --body "Updated submodules" --reviewer Xyna-Factory/Xyna_Reviewers --base main --head ${{ inputs.branch_update }} 
+       run: gh pr create --title "Update Submodule Dependencies" --body "Updated submodules" --reviewer Xyna_Reviewers --base main --head ${{ inputs.branch_update }} 
