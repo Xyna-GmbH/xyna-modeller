@@ -1,0 +1,39 @@
+name: Update submodules
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch_to_update:
+        default: 'remotes/origin/main'
+        required: false
+        type: string
+
+jobs:
+  update-submodules:
+    runs-on: ubuntu-latest
+    steps:
+    
+     - name: Check out xyna-modeller
+       uses: actions/checkout@v4
+       with:
+         ref: ${{ inputs.branch_to_update }}
+
+     - name: init submodule
+       run: |
+         git submodule update --init impl/projects/xyna/src/app/zeta
+         git submodule update --init impl/projects/xyna/src/app/xfm/acm
+         git submodule update --init impl/projects/xyna/src/app/xfm/factorymanager
+         git submodule update --init impl/projects/xyna/src/app/xfm/processmodeller
+         git submodule update --init impl/projects/xyna/src/app/xfm/processmonitor
+         git submodule update --init impl/projects/xyna/src/app/xfm/testfactory
+         git submodule update --init impl/projects/xyna/src/app/xfm/yggdrasil
+
+     - name: update dependencies
+       run: git submodule foreach git checkout remotes/origin/main
+
+     - name: Commit
+       uses: github-actions-x/commit@v2.9
+       with:
+         github-token: ${{ secrets.GITHUB_TOKEN }}
+         push-branch: ${{ inputs.branch_to_update }}
+         commit-message: update dependencies
