@@ -3,7 +3,7 @@ name: Update submodules
 on:
   workflow_dispatch:
     inputs:
-      branch_to_update:
+      branch_update:
         default: 'main'
         required: false
         type: string
@@ -15,8 +15,11 @@ jobs:
     
      - name: Check out xyna-modeller
        uses: actions/checkout@v4
-       with:
-         ref: ${{ inputs.branch_to_update }}
+       
+     - name:
+       run: |
+         git branch ${{ inputs.branch_update }}
+         git switch ${{ inputs.branch_update }}
 
      - name: init submodule
        run: |
@@ -48,3 +51,7 @@ jobs:
          git remote set-url origin https://x-access-token:${{ secrets.PAT }}@github.com/${{ github.repository }}
          git commit -m "Update dependencies"
          git push
+     
+     - name: Create Pull Request
+       run: |
+         gh pr create --title "Update Submodule Dependencies" --reviewer Xyna-Factory/xyna_reviewers --base main --head ${{ inputs.branch_update }}
