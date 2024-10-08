@@ -16,12 +16,12 @@ jobs:
      - name: Check out xyna-modeller
        uses: actions/checkout@v4
        
-     - name:
+     - name: Create new branch
        run: |
          git branch ${{ inputs.branch_update }}
          git switch ${{ inputs.branch_update }}
 
-     - name: init submodule
+     - name: Init submodule
        run: |
          git submodule update --init impl/projects/xyna/src/app/zeta
          git submodule update --init impl/projects/xyna/src/app/xfm/acm
@@ -31,10 +31,10 @@ jobs:
          git submodule update --init impl/projects/xyna/src/app/xfm/testfactory
          git submodule update --init impl/projects/xyna/src/app/xfm/yggdrasil
 
-     - name: update dependencies
+     - name: Update dependencies
        run: git submodule foreach git checkout remotes/origin/main
        
-     - name: add changes
+     - name: Add changes
        run: |
          git add impl/projects/xyna/src/app/zeta
          git add impl/projects/xyna/src/app/xfm/acm
@@ -55,4 +55,4 @@ jobs:
      - name: Create Pull Request
        env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-       run: gh pr create --title "Update Submodule Dependencies" --reviewer Xyna-Factory/xyna_reviewers --base main --head ${{ inputs.branch_update }} 
+       run: gh pr create --title "Update Submodule Dependencies" --body "Updated submodules" --reviewer Xyna-Factory/xyna_reviewers --base main --head ${{ inputs.branch_update }} 
