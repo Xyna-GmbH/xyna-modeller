@@ -2,11 +2,11 @@ name: Update submodules
 
 on:
   workflow_dispatch:
-    inputs:
-      branch_to_update:
-        default: 'remotes/origin/main'
-        required: false
-        type: string
+    #inputs:
+      #branch_to_update:
+       # default: 'remotes/origin/main'
+       # required: false
+       # type: string
 
 jobs:
   update-submodules:
@@ -15,8 +15,8 @@ jobs:
     
      - name: Check out xyna-modeller
        uses: actions/checkout@v4
-       with:
-         ref: ${{ inputs.branch_to_update }}
+       #with:
+         #ref: ${{ inputs.branch_to_update }}
 
      - name: init submodule
        run: |
@@ -35,5 +35,5 @@ jobs:
        uses: github-actions-x/commit@v2.9
        with:
          github-token: ${{ secrets.GITHUB_TOKEN }}
-         push-branch: ${{ inputs.branch_to_update }}
+        # push-branch: ${{ inputs.branch_to_update }}
          commit-message: update dependencies
