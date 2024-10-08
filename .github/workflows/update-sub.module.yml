@@ -31,7 +31,7 @@ jobs:
      - name: update dependencies
        run: git submodule foreach git checkout remotes/origin/main
        
-    - name: add changes
+     - name: add changes
        run: |
          git add impl/projects/xyna/src/app/zeta
          git add impl/projects/xyna/src/app/xfm/acm
