@@ -53,5 +53,6 @@ jobs:
          git push --set-upstream origin ${{ inputs.branch_update }}
      
      - name: Create Pull Request
-       run: |
-         gh pr create --title "Update Submodule Dependencies" --reviewer Xyna-Factory/xyna_reviewers --base main --head ${{ inputs.branch_update }}
+       env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+       run: gh pr create --title "Update Submodule Dependencies" --reviewer Xyna-Factory/xyna_reviewers --base main --head ${{ inputs.branch_update }} 
