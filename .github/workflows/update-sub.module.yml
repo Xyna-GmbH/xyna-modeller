@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       branch_to_update:
-        default: 'remotes/origin/main'
+        default: 'main'
         required: false
         type: string
 
@@ -37,3 +37,4 @@ jobs:
          github-token: ${{ secrets.GITHUB_TOKEN }}
          push-branch: ${{ inputs.branch_to_update }}
          commit-message: update dependencies
+         files: [impl/projects/xyna/src/app/zeta, impl/projects/xyna/src/app/xfm/acm, impl/projects/xyna/src/app/xfm/factorymanager, impl/projects/xyna/src/app/xfm/processmodeller, impl/projects/xyna/src/app/xfm/processmonitor, impl/projects/xyna/src/app/xfm/testfactory, impl/projects/xyna/src/app/xfm/yggdrasil]
