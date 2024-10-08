@@ -30,6 +30,16 @@ jobs:
 
      - name: update dependencies
        run: git submodule foreach git checkout remotes/origin/main
+       
+    - name: add changes
+       run: |
+         git add impl/projects/xyna/src/app/zeta
+         git add impl/projects/xyna/src/app/xfm/acm
+         git add impl/projects/xyna/src/app/xfm/factorymanager
+         git add impl/projects/xyna/src/app/xfm/processmodeller
+         git add impl/projects/xyna/src/app/xfm/processmonitor
+         git add impl/projects/xyna/src/app/xfm/testfactory
+         git add impl/projects/xyna/src/app/xfm/yggdrasil
 
      - name: Commit
        uses: github-actions-x/commit@v2.9
@@ -37,4 +47,3 @@ jobs:
          github-token: ${{ secrets.GITHUB_TOKEN }}
          push-branch: ${{ inputs.branch_to_update }}
          commit-message: update dependencies
-         files: impl/projects/xyna/src/app/zeta impl/projects/xyna/src/app/xfm/acm impl/projects/xyna/src/app/xfm/factorymanager impl/projects/xyna/src/app/xfm/processmodeller impl/projects/xyna/src/app/xfm/processmonitor impl/projects/xyna/src/app/xfm/testfactory impl/projects/xyna/src/app/xfm/yggdrasil
