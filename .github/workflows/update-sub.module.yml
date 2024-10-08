@@ -27,7 +27,7 @@ jobs:
          git submodule update --init impl/projects/xyna/src/app/xfm/yggdrasil
 
      - name: update dependencies
-        git submodule foreach git checkout remotes/origin/main
+       run: git submodule foreach git checkout remotes/origin/main
 
      - name: Commit
        uses: github-actions-x/commit@v2.9
