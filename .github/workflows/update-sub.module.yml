@@ -8,8 +8,7 @@ on:
         required: false
         type: string
 
-permissions:
-  pull-requests: write
+permissions: write-all
 
 jobs:
   update-submodules:
