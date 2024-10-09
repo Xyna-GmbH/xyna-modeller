@@ -3,10 +3,14 @@ name: Update submodules
 on:
   workflow_dispatch:
     inputs:
-      branch_to_update:
-        default: 'remotes/origin/main'
+      branch_update:
+        default: 'update-dependencies'
         required: false
         type: string
+
+permissions: 
+  contents: write
+  pull-requests: write
 
 jobs:
   update-submodules:
@@ -15,10 +19,13 @@ jobs:
     
      - name: Check out xyna-modeller
        uses: actions/checkout@v4
-       with:
-         ref: ${{ inputs.branch_to_update }}
+       
+     - name: Create new branch
+       run: |
+         git branch ${{ inputs.branch_update }}
+         git switch ${{ inputs.branch_update }}
 
-     - name: init submodule
+     - name: Init submodule
        run: |
          git submodule update --init impl/projects/xyna/src/app/zeta
          git submodule update --init impl/projects/xyna/src/app/xfm/acm
@@ -28,12 +35,28 @@ jobs:
          git submodule update --init impl/projects/xyna/src/app/xfm/testfactory
          git submodule update --init impl/projects/xyna/src/app/xfm/yggdrasil
 
-     - name: update dependencies
+     - name: Update dependencies
        run: git submodule foreach git checkout remotes/origin/main
+       
+     - name: Add changes
+       run: |
+         git add impl/projects/xyna/src/app/zeta
+         git add impl/projects/xyna/src/app/xfm/acm
+         git add impl/projects/xyna/src/app/xfm/factorymanager
+         git add impl/projects/xyna/src/app/xfm/processmodeller
+         git add impl/projects/xyna/src/app/xfm/processmonitor
+         git add impl/projects/xyna/src/app/xfm/testfactory
+         git add impl/projects/xyna/src/app/xfm/yggdrasil
 
      - name: Commit
-       uses: github-actions-x/commit@v2.9
-       with:
-         github-token: ${{ secrets.GITHUB_TOKEN }}
-         push-branch: ${{ inputs.branch_to_update }}
-         commit-message: update dependencies
+       run: |
+         git config --global user.name '${{ github.actor }}'
+         git config --global user.email '${{ github.actor }}@users.noreply.github.com'
+         git remote set-url origin https://x-access-token:${{ secrets.PAT }}@github.com/${{ github.repository }}
+         git commit -m "Update dependencies"
+         git push --set-upstream origin ${{ inputs.branch_update }}
+     
+     - name: Create Pull Request
+       env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+       run: gh pr create --title "Update Submodule Dependencies" --body "Updated submodules" --base main --head ${{ inputs.branch_update }} 
