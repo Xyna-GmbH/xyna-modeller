@@ -16,6 +16,7 @@
                         },
                         "index": "projects/xyna/src/index.html",
                         "polyfills": [
+                          "@angular/localize/init",
                           "projects/xyna/src/polyfills.ts"
                         ],
                         "tsConfig": "projects/xyna/tsconfig.app.json",
@@ -63,8 +64,8 @@
                         "production": {
                             "fileReplacements": [
                                 {
-                                    "src": "projects/xyna/src/environments/environment.ts",
-                                    "replaceWith": "projects/xyna/src/environments/environment.prod.ts"
+                                    "replace": "projects/xyna/src/environments/environment.ts",
+                                    "with": "projects/xyna/src/environments/environment.prod.ts"
                                 }
                             ],
                             "optimization": true,
@@ -83,14 +84,14 @@
                 "serve": {
                     "builder": "@angular/build:dev-server",
                     "options": {
-                        "browserTarget": "xyna:build"
+                        "buildTarget": "xyna:build"
                     },
                     "configurations": {
                         "production": {
-                            "browserTarget": "xyna:build:production"
+                            "buildTarget": "xyna:build:production"
                         },
                         "development": {
-                            "browserTarget": "xyna:build:development"
+                            "buildTarget": "xyna:build:development"
                         }
                     }
                 }
