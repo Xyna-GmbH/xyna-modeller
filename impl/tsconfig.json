@@ -11,6 +11,7 @@
         "experimentalDecorators": true,
         "resolveJsonModule": true,
         "target": "ES2022",
+        "useDefineForClassFields": false,
         "typeRoots": [
             "node_modules/@types"
         ],
@@ -35,7 +36,6 @@
                 "projects/xyna/src/environments/*"
             ]
         },
-        "useDefineForClassFields": false
     },
     "angularCompilerOptions": {
         "preserveWhitespaces": false
