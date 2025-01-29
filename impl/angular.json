@@ -9,9 +9,11 @@
             "projectType": "application",
             "architect": {
                 "build": {
-                    "builder": "@angular-devkit/build-angular:browser-esbuild",
+                    "builder": "@angular/build:application",
                     "options": {
-                        "outputPath": "dist/xyna",
+                        "outputPath": {
+                          "base": "dist/xyna"
+                        },
                         "index": "projects/xyna/src/index.html",
                         "polyfills": [
                           "@angular/localize/init",
@@ -56,7 +58,7 @@
                             ]
                         },
                         "scripts": [],
-                        "main": "projects/xyna/src/main.ts"
+                        "browser": "projects/xyna/src/main.ts"
                     },
                     "configurations": {
                         "production": {
