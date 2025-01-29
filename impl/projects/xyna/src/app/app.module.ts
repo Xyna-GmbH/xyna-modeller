@@ -26,18 +26,24 @@ import { AppComponent } from './app.component';
 import { AppRoutingModules, AppRoutingProviders } from './app.routing';
 
 
-@NgModule({ bootstrap: [
+@NgModule({
+    bootstrap: [
         AppComponent
     ],
     declarations: [
         AppComponent
-    ], imports: [BrowserModule,
+    ],
+    imports: [
+        BrowserModule,
         BrowserAnimationsModule,
         ZetaModule,
-        ...AppRoutingModules], providers: [
+        ...AppRoutingModules
+    ],
+    providers: [
         ...AppRoutingProviders,
         Title,
         provideHttpClient(withInterceptorsFromDi())
-    ] })
+    ]
+})
 export class AppModule {
 }

@@ -20,7 +20,7 @@
                           "projects/xyna/src/polyfills.ts"
                         ],
                         "tsConfig": "projects/xyna/tsconfig.app.json",
-                        "localize": true,
+                        "localize": false,
                         "assets": [
                             {
                                 "glob": "favicon.ico",
