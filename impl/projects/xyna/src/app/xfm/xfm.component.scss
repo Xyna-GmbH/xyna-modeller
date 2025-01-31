@@ -21,7 +21,7 @@ $navigation-highlight-color-processmonitor: unset !default;
 $navigation-highlight-color-testfactory: unset !default;
 $navigation-highlight-color-acm: unset !default;
 
-@import 'const';
+@import '../const';
 
 
 :host {
