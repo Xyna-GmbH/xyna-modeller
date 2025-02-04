@@ -30,14 +30,12 @@
  *   --releaseVersion
  *     Versionsnummer des Releases; wird unter anderem als Bestandteil der Dateinamen von Liefergegenständen verwendet
  *
- *   --lang
- *     Sprache des Releases (z. B. de-DE); wird unter anderem als Bestandteil der Dateinamen von Liefergegenständen verwendet
  */
 function Gruntfile(grunt) {
 
     grunt.loadNpmTasks('grunt-contrib-concat');
 
-    var serverConfig = grunt.file.exists("server.json") ? grunt.file.readJSON("server.json"): {};
+    var serverConfig = grunt.file.exists("server.json") ? grunt.file.readJSON("server.json") : {};
 
     var config = {
         pkg: grunt.file.readJSON("package.json"),
@@ -48,12 +46,9 @@ function Gruntfile(grunt) {
         //Name der WAR-Datei und des Pfades, in den später ein Release deployt wird
         appName: "modeller",
 
-        //Language Argument
-        langSuffix: ((grunt.option("lang") && !grunt.option("suppressLangSuffix")) ? "_" + grunt.option('lang') : ""),
-
         //URL, unter der die Application später gehostet werden soll. Diese sollte mit dem appName
         //übereinstimmen.
-        baseUrl: "/<%= appName %><%= langSuffix %>/",
+        baseUrl: "/<%= appName %>/",
 
         //Build-Verzeichnis: Bei einem Build werden hier Zwischenprodukte erzeugt und weiterverarbeitet
         buildDir: grunt.option("buildDir") || ".",
@@ -70,10 +65,10 @@ function Gruntfile(grunt) {
         },
         serverConfig: serverConfig,
         deployment: {
-            host:            "<%= serverConfig.host %>",
-            username:        "<%= serverConfig.username %>",
-            password:        "<%= serverConfig.password %>",
-            warPath:         "<%= serverConfig.warPath' %>",
+            host: "<%= serverConfig.host %>",
+            username: "<%= serverConfig.username %>",
+            password: "<%= serverConfig.password %>",
+            warPath: "<%= serverConfig.warPath %>",
             develTargetPath: "<%= serverConfig.develTargetPath %>",
 
             //Der Task deploy benötigt eine rsync-Implementierung auf dem lokalen System (unter Windows z.B. mittels cygwin)
@@ -83,60 +78,45 @@ function Gruntfile(grunt) {
         },
 
         concat: {
-          copyrightHeader: {
-            src: ["./copyrightheader.js", "./_main.js"],
-            dest: "./_main_w_copyright.js"
-          }
+            copyrightHeader: {
+                src: ["./copyrightheader.js", "./_main.js"],
+                dest: "./_main_w_copyright.js"
+            }
         }
     };
-
-    var htmlLang = 'en';
-	if (grunt.option('lang') === 'de-DE') {
-		htmlLang = 'de';
-	}
-    fullLangSuffix = 'en-US';
-	if (grunt.option('lang')) {
-	    fullLangSuffix = grunt.option('lang');
-	}
 
     config["clean"] = {
         options: {
             force: !grunt.option("buildDir")
         },
-        build: ["<%= buildDir %>/../impl/dist/xyna/"],
+        build: ["<%= buildDir %>/../impl/dist/xyna/browser/"],
         release: ["<%= releaseDir %>"],
-        mocks: ["<%= buildDir %>/../impl/dist/xyna/assets/mocks"]
+        mocks: ["<%= buildDir %>/../impl/dist/xyna/browser/assets/mocks"]
     };
 
     config["replace"] = {
         "title": {
             options: {
                 patterns: [
-                    {match: "TEMPLATE_APP_TITLE", replacement: "<%= appTitle %>"},
-                    {match: "TEMPLATE_APP_NAME",  replacement: "<%= appName %>"}
+                    { match: "TEMPLATE_APP_TITLE", replacement: "<%= appTitle %>" },
+                    { match: "TEMPLATE_APP_NAME", replacement: "<%= appName %>" }
                 ]
             },
             files: [
-                {expand: true, flatten: true, src: ["<%= buildDir %>/../impl/dist/xyna/WEB-INF/web.xml"], dest: "<%= buildDir %>/../impl/dist/xyna/WEB-INF"}
+                { expand: true, flatten: true, src: ["<%= buildDir %>/../impl/dist/xyna/browser/WEB-INF/web.xml"], dest: "<%= buildDir %>/../impl/dist/xyna/browser/WEB-INF" }
             ]
         },
-		"lang": {
-			options: {
-                patterns: [{match: /<html lang=\"en/g, replacement: "<html lang=\"" + htmlLang}]
-            },
-            files: [{expand: true, flatten: true, src: ["<%= buildDir %>/../impl/dist/xyna/index.html"], dest: "<%= buildDir %>/../impl/dist/xyna"}]
-		},
         "baseurl": {
             options: {
-                patterns: [{match: /<base href=\".*\">/g, replacement: "<base href=\"<%= baseUrl %>\">"}]
+                patterns: [{ match: /<base href=\".*\">/g, replacement: "<base href=\"<%= baseUrl %>\">" }]
             },
-            files: [{expand: true, flatten: true, src: ["<%= buildDir %>/../impl/dist/xyna/en-US/index.html"], dest: "<%= buildDir %>/../impl/dist/xyna/en-US"}]
+            files: [{ expand: true, flatten: true, src: ["<%= buildDir %>/../impl/dist/xyna/browser/index.html"], dest: "<%= buildDir %>/../impl/dist/xyna/browser" }]
         },
         "baseurl-dev": {
             options: {
-                patterns: [{match: /<base href=\"\/\">/g, replacement: "<base href=\".\">"}]
+                patterns: [{ match: /<base href=\"\/\">/g, replacement: "<base href=\".\">" }]
             },
-            files: [{expand: true, flatten: true, src: ["<%= buildDir %>/../impl/dist/xyna/index.html"], dest: "<%= buildDir %>/../impl/dist/xyna"}]
+            files: [{ expand: true, flatten: true, src: ["<%= buildDir %>/../impl/dist/xyna/browser/index.html"], dest: "<%= buildDir %>/../impl/dist/xyna/browser" }]
         }
     };
 
@@ -144,9 +124,9 @@ function Gruntfile(grunt) {
         "build-war": {
             options: {
                 mode: "zip",
-                archive: "<%= releaseDir %>/<%= appName %><%= langSuffix %>.war",
+                archive: "<%= releaseDir %>/<%= appName %>.war",
             },
-            files: [{expand: true, cwd: "<%= buildDir %>/../impl/dist/xyna/en-US/", src: ["**"]}]
+            files: [{ expand: true, cwd: "<%= buildDir %>/../impl/dist/xyna/browser/", src: ["**"] }]
         }
     };
 
@@ -164,9 +144,9 @@ function Gruntfile(grunt) {
                 dest: "<%= deployment.develTargetPath %>/api/"
             }
         },
-        "deploy-modeler": {
+        "deploy-modeller": {
             options: {
-                src: "<%= buildDir %>/../impl/dist/xyna/**",
+                src: "<%= buildDir %>/../impl/dist/xyna/browser/**",
                 host: "<%= deployment.username %>@<%= deployment.host %>",
                 dest: "<%= deployment.develTargetPath %>/impl/"
             }
@@ -210,10 +190,10 @@ function Gruntfile(grunt) {
     //Test-Tasks
     //----------
 
-    grunt.registerTask("test-modeler", function() {
+    grunt.registerTask("test-modeller", function () {
         var exec = require("child_process").exec;
         var cb = this.async();
-        exec("npm run lint", {cwd: "../impl"}, function(err, stdout, stderr) {
+        exec("npm run lint", { cwd: "../impl" }, function (err, stdout) {
             console.log(stdout);
             if (err) {
                 console.error(`exec error: ${err}`);
@@ -227,44 +207,58 @@ function Gruntfile(grunt) {
     //-----------
 
     grunt.registerTask("rename-for-concat-copyright", () => {
-      var origfileList = grunt.file.expand("../impl/dist/xyna/" + fullLangSuffix + "/main.*.js");
-      var origfile = origfileList[0];
-      config["main.js.origfile"] = origfile;
-      grunt.file.copy(origfile, "./_main.js");
-      //grunt.file.delete(origfile);
+        var origfileList = grunt.file.expand("../impl/dist/xyna/browser/main-*.js");
+        var origfile = origfileList[0];
+
+        if (origfile) {
+            config["main.js.origfile"] = origfile;
+            grunt.file.copy(origfile, "./_main.js");
+        } else {
+            grunt.log.error("No original file found! Please check if the file exists.");
+        }
     });
 
     grunt.registerTask("finish-concat-copyright", () => {
-      grunt.log.writeln("Adjusting " + config["main.js.origfile"]);
+        grunt.log.writeln("Adjusting " + config["main.js.origfile"]);
 
-      grunt.file.copy("./_main_w_copyright.js", config["main.js.origfile"]);
-      grunt.file.delete("./_main_w_copyright.js");
-      grunt.file.delete("./_main.js");
+        grunt.file.copy("./_main_w_copyright.js", config["main.js.origfile"]);
+        grunt.file.delete("./_main_w_copyright.js");
+        grunt.file.delete("./_main.js");
     });
 
-    grunt.registerTask("add-copyright-header", ["rename-for-concat-copyright", "concat:copyrightHeader", "finish-concat-copyright"]);
+    grunt.registerTask("add-copyright-header", [
+        "rename-for-concat-copyright",
+        "concat:copyrightHeader",
+        "finish-concat-copyright"
+    ]);
 
-
-    grunt.registerTask("default", ["clean:build", "test-modeler", "build-modeler", "replace:baseurl-dev", "replace:title", "add-copyright-header"]);
+    grunt.registerTask("default", [
+        "clean:build",
+        "test-modeller",
+        "build-modeller",
+        "replace:baseurl-dev",
+        "replace:title",
+        "add-copyright-header"
+    ]);
 
     grunt.registerTask("release", [
         "clean:build", "clean:release",
-        "test-modeler", "release-modeler" + (grunt.option("lang") ? "::" + grunt.option('lang') : ""),
-        "replace:baseurl", /*"replace:title",*/ "add-copyright-header", "clean:mocks", /*"replace:lang",*/
+        "test-modeller", "release-modeller",
+        "replace:baseurl", /*"replace:title",*/ "add-copyright-header", "clean:mocks",
         "compress:build-war"
     ]);
 
     grunt.registerTask("devel-war", [
         "clean:build", "clean:release",
-        "test-modeler", "build-modeler",
+        "test-modeller", "build-modeller",
         "replace:baseurl", "replace:title", "add-copyright-header", "clean:mocks",
         "compress:build-war"
     ]);
 
-    grunt.registerTask("build-api-doc", function() {
+    grunt.registerTask("build-api-doc", function () {
         var exec = require("child_process").exec;
         var cb = this.async();
-        exec("npm run apidoc", {cwd: "../api"}, function(err, stdout, stderr) {
+        exec("npm run apidoc", { cwd: "../api" }, function (err, stdout, stderr) {
             console.log(stdout);
             if (err) {
                 console.error(`exec error: ${err}`);
@@ -274,10 +268,10 @@ function Gruntfile(grunt) {
         });
     });
 
-    grunt.registerTask("build-modeler", function() {
+    grunt.registerTask("build-modeller", function () {
         var exec = require("child_process").exec;
         var cb = this.async();
-        exec("npm run build", {cwd: "../impl"}, function(err, stdout, stderr) {
+        exec("npm run build", { cwd: "../impl" }, function (err, stdout, stderr) {
             console.log(stdout);
             if (err) {
                 console.error(`exec error: ${err}`);
@@ -287,12 +281,10 @@ function Gruntfile(grunt) {
         });
     });
 
-
-    grunt.registerTask("release-modeler", function(task, lang) {
-        console.log("with args: " + task + ', ' + lang);
+    grunt.registerTask("release-modeller", function (task) {
         var exec = require("child_process").exec;
         var cb = this.async();
-        exec("npm run release" + (lang ? ":" + lang : ""), {maxBuffer : 500 * 1024, cwd: "../impl"}, function(err, stdout, stderr) {
+        exec("npm run release", { maxBuffer: 500 * 1024, cwd: "../impl" }, function (err, stdout, stderr) {
             console.log(stdout);
             if (err) {
                 console.error(`exec error: ${err}`);
@@ -305,7 +297,7 @@ function Gruntfile(grunt) {
     //Deployment-Tasks:
     //-----------------
 
-    grunt.registerTask("deploy", ["deploy-api-doc", "rsync:deploy-modeler"]);
+    grunt.registerTask("deploy", ["deploy-api-doc", "rsync:deploy-modeller"]);
 
     grunt.registerTask("deploy-api-doc", ["rsync:deploy-api-doc"]);
 
