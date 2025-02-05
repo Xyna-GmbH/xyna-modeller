@@ -39,11 +39,11 @@ $xc-button-border-radius: 4px;
   * XFM Variables
   ****************************************************/
 
-$navigation-highlight-color-processmodeller: theme.$color-black;
-$navigation-highlight-color-factorymanager: theme.$color-black;
-$navigation-highlight-color-processmonitor: theme.$color-black;
-$navigation-highlight-color-testfactory: theme.$color-black;
-$navigation-highlight-color-acm: theme.$color-black;
+$navigation-highlight-color-processmodeller: theme.$color-invert;
+$navigation-highlight-color-factorymanager: theme.$color-invert;
+$navigation-highlight-color-processmonitor: theme.$color-invert;
+$navigation-highlight-color-testfactory: theme.$color-invert;
+$navigation-highlight-color-acm: theme.$color-invert;
 
 @if theme.$theme == xyna {
     $navigation-highlight-color-processmodeller: #f10870;
